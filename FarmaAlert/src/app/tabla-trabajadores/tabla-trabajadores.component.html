@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <div class="dropdown mb-2">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        Menú
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Agregar</a></li>
+        <li><a class="dropdown-item" href="#">Modificar</a></li>
+        <li><a class="dropdown-item" href="#">Borrar</a></li>
+      </ul>
+    </div>
+  
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Pacientes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngtcs="let trabajador of trabajadores">
+          <td>{{ trabajador.id }}</td>
+          <td>{{ trabajador.nombre }}</td>
+          <td>{{ trabajador.edad }}</td>
+          <td>{{ trabajador.paciente }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
