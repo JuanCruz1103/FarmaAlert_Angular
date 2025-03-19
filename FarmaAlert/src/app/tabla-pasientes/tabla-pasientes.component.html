@@ -1,1 +1,34 @@
-<p>tabla-pasientes works!</p>
+<div class="container mt-4">
+    <div class="dropdown mb-2">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        Menú
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Agregar</a></li>
+        <li><a class="dropdown-item" href="#">Modificar</a></li>
+        <li><a class="dropdown-item" href="#">Borrar</a></li>
+      </ul>
+    </div>
+  
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Pacientes</th>
+          <th>Habitación</th>
+          <th>Medicamentos</th>
+          <th>Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngtcs="let paciente of Pacientes">
+          <td>{{ paciente.pacientes }}</td>
+          <td>{{ paciente.habitacion }}</td>
+          <td>{{ paciente.medicamentos }}</td>
+          <td>{{ paciente.detalles }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+    <app-sidebar></app-sidebar>
+      <app-navbar></app-navbar>

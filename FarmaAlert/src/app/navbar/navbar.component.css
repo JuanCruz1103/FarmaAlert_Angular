@@ -1,0 +1,11 @@
+.navbar {
+    height: 70px;  /* Ajusta la altura */
+  }
+  
+  .navbar-brand, .nav-link {
+    font-size: 20px;  /* Reduce el tamaño de los textos */
+    padding: 10px 40px; /* Reduce el espacio */
+    z-index: 2;
+    position: relative;
+    
+  }

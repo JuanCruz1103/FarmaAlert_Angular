@@ -1,1 +1,38 @@
-<p>tabla-pastillas works!</p>
+<div class="container mt-4">
+    <div class="dropdown mb-2">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        Menú
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Agregar</a></li>
+        <li><a class="dropdown-item" href="#">Modificar</a></li>
+        <li><a class="dropdown-item" href="#">Borrar</a></li>
+      </ul>
+    </div>
+  
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Medicamento</th>
+          <th>Gramos</th>
+          <th>Fecha de Cadusidad</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngtcs="let pastilla of pastillas">
+          <td>{{ pastillas.medicamento }}</td>
+          <td>{{ pastillas.gramos }}</td>
+          <td>{{ pastillas.fecha de Cadusidad }}</td>
+          <td>{{ pastillas.stock }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex">
+    <app-sidebar></app-sidebar>
+    <div class="flex-grow-1 ms-3">
+      <app-navbar></app-navbar>
+    </div>
+  </div>   
