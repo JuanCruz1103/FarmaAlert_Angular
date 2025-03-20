@@ -1,0 +1,27 @@
+mat-card {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+mat-list-item {
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.chart-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+mat-card-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}

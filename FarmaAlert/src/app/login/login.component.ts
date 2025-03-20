@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { RegisterComponent } from '../register/register.component';
 
 
@@ -14,5 +14,10 @@ export class LoginComponent {
 
   togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
+  }
+
+  constructor(private router: Router){}
+  Registro(){
+    this.router.navigate(['/register']);
   }
 }

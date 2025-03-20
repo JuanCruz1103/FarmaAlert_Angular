@@ -1,11 +1,45 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-estadisticas',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatListModule],
   templateUrl: './estadisticas.component.html',
-  styleUrl: './estadisticas.component.css'
+  styleUrl: './estadisticas.component.css',
 })
-export class EstadisticasComponent {
+export class EstadisticasComponent implements AfterViewInit {
+  proteuses = 80;
+  trabajadores = 34;
+  pacillas = 500;
 
+  @ViewChild('barChartCanvas') barChartCanvas!: ElementRef<HTMLCanvasElement>;
+  barChart!: Chart;
+
+  ngAfterViewInit() {
+    this.barChart = new Chart(this.barChartCanvas.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: ['Proteuses', 'Trabajadores', 'Pacillas'],
+        datasets: [
+          {
+            label: 'Cantidad',
+            data: [this.proteuses, this.trabajadores, this.pacillas],
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            borderColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true },
+        },
+      },
+    });
+  }
 }
