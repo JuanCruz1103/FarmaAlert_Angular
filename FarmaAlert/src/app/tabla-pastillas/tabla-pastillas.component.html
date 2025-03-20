@@ -1,38 +1,30 @@
-<div class="container mt-4">
-    <div class="dropdown mb-2">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-        Menú
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Agregar</a></li>
-        <li><a class="dropdown-item" href="#">Modificar</a></li>
-        <li><a class="dropdown-item" href="#">Borrar</a></li>
-      </ul>
-    </div>
+<div class="container mt-3">
+    <button class="btn btn-success" (click)="agregar()">➕Agregar</button>
   
-    <table class="table table-bordered">
-      <thead class="table-light">
-        <tr>
-          <th>Medicamento</th>
-          <th>Gramos</th>
-          <th>Fecha de Cadusidad</th>
-          <th>Stock</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngtcs="let pastilla of pastillas">
-          <td>{{ pastillas.medicamento }}</td>
-          <td>{{ pastillas.gramos }}</td>
-          <td>{{ pastillas.fecha de Cadusidad }}</td>
-          <td>{{ pastillas.stock }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="d-flex">
-    <app-sidebar></app-sidebar>
-    <div class="flex-grow-1 ms-3">
-      <app-navbar></app-navbar>
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th>Medicamento</th>
+            <th>Gramos</th>
+            <th>Fecha de Caducacion</th>
+            <th>Stock</th>
+            <th>editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngtcs="let pastilla of pastillas">
+            <td>{{pastilla.id }}</td>
+            <td>{{pastilla.nombre }}</td>
+            <td>{{pastilla.edad }}</td>
+            <td>{{pastilla.paciente }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="editar(pastilla)">✏️</button>
+            </td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="eliminar(pastilla.id)">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </div>   

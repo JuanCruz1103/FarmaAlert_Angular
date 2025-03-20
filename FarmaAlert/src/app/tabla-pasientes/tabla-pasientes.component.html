@@ -1,14 +1,5 @@
-<div class="container mt-4">
-    <div class="dropdown mb-2">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-        Menú
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Agregar</a></li>
-        <li><a class="dropdown-item" href="#">Modificar</a></li>
-        <li><a class="dropdown-item" href="#">Borrar</a></li>
-      </ul>
-    </div>
+<div class="container mt-3">
+  <button class="btn btn-success" (click)="agregar()">➕Agregar</button>
   
     <table class="table table-bordered">
       <thead class="table-light">
@@ -17,6 +8,8 @@
           <th>Habitación</th>
           <th>Medicamentos</th>
           <th>Detalles</th>
+          <th>editar</th>
+          <th>Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -25,10 +18,13 @@
           <td>{{ paciente.habitacion }}</td>
           <td>{{ paciente.medicamentos }}</td>
           <td>{{ paciente.detalles }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="editar(paciente)">✏️</button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="eliminar(paciente.id)">🗑️</button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
-
-    <app-sidebar></app-sidebar>
-      <app-navbar></app-navbar>

@@ -1,15 +1,6 @@
-<div class="container mt-4">
-    <div class="dropdown mb-2">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-        Menú
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Agregar</a></li>
-        <li><a class="dropdown-item" href="#">Modificar</a></li>
-        <li><a class="dropdown-item" href="#">Borrar</a></li>
-      </ul>
-    </div>
-  
+<div class="container mt-3">
+  <button class="btn btn-success" (click)="agregar()">➕Agregar</button>
+
     <table class="table table-bordered">
       <thead class="table-light">
         <tr>
@@ -17,6 +8,8 @@
           <th>Nombre</th>
           <th>Edad</th>
           <th>Pacientes</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +18,12 @@
           <td>{{ trabajador.nombre }}</td>
           <td>{{ trabajador.edad }}</td>
           <td>{{ trabajador.paciente }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="editar(trabajador)">✏️</button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="eliminar(trabajador.id)">🗑️</button>
+          </td>
         </tr>
       </tbody>
     </table>
