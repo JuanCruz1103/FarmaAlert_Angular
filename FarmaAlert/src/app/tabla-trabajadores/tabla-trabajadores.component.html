@@ -1,32 +1,31 @@
 <app-navbar></app-navbar>
 <div class="container mt-3">
-  <button class="btn btn-success" (click)="agregar()">➕Agregar</button>
+  <button class="btn btn-success" (click)="agregar()">➕ Agregar</button>
 
-    <table class="table table-bordered">
-      <thead class="table-light">
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Edad</th>
-          <th>Pacientes</th>
-          <th>Editar</th>
-          <th>Eliminar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngtcs="let trabajador of trabajadores">
-          <td>{{ trabajador.id }}</td>
-          <td>{{ trabajador.nombre }}</td>
-          <td>{{ trabajador.edad }}</td>
-          <td>{{ trabajador.paciente }}</td>
-          <td>
-            <button class="btn btn-warning btn-sm" (click)="editar(trabajador)">✏️</button>
-          </td>
-          <td>
-            <button class="btn btn-danger btn-sm" (click)="eliminar(trabajador.id)">🗑️</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Pacientes</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trabajador of trabajadores">
+        <td>{{ trabajador.id }}</td>
+        <td>{{ trabajador.nombre }}</td>
+        <td>{{ trabajador.edad }}</td>
+        <td>{{ trabajador.paciente }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="editar(trabajador)">✏️</button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="eliminar(trabajador.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
