@@ -1,21 +1,28 @@
-<div class="d-flex flex-column p-3 text-white bg-dark sidebar" >
-    <img src="Imagenes\FarmaAlertPNGWhite.svg" width="100%" alt="FarmaAlertPNGWhite">
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link text-white" >📊 Estadísticas</a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white app-tabla-pasientes">🧑‍⚕️ Pacientes</a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white app-tabla-pastillas">💊 Medicamentos</a>
-      </li>
-      <li>
-        <a href="#" class="nav-link active app-tabla-trabajadores">👨‍🏭 Trabajadores</a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-danger">🚪 Cerrar sesión</a>
-      </li>
-    </ul>
-  </div>
-  
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <div class="d-flex flex-column p-3 text-white bg-dark sidebar">
+        <img src="assets/Imagenes/FarmaAlertPNGWhite.svg" width="100%" alt="FarmaAlertPNGWhite">
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a routerLink="/dashboard" routerLinkActive="active" class="nav-link text-white">📊 Estadísticas</a>
+          </li>
+          <li>
+            <a routerLink="/pacientes" routerLinkActive="active" class="nav-link text-white">🧑‍⚕️ Pacientes</a>
+          </li>
+          <li>
+            <a routerLink="/medicamentos" routerLinkActive="active" class="nav-link text-white">💊 Medicamentos</a>
+          </li>
+          <li>
+            <a routerLink="/trabajadores" routerLinkActive="active" class="nav-link text-white">👨‍🏭 Trabajadores</a>
+          </li>
+          <li>
+              <a routerLink="/login" routerLinkActive="active"  class="nav-link text-danger">🚪 Cerrar sesión</a>
+            </li>
+        </ul>
+      </div>
+
+      <!-- Main content -->
+      <main class="content">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
