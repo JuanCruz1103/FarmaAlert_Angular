@@ -1,29 +1,41 @@
-mat-card {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px;
-}
+  mat-card {
+      max-width: 500px;
+      width: 100%;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(238, 193, 193, 0.1);
+  }
 
-mat-list-item {
-    padding: 10px 0;
-    font-size: 16px;
-}
 
-.chart-container {
-    max-width: 500px;
-    margin: 0 auto;
-}
+  mat-list-item {
+      padding: 10px 0;
+      font-size: 16px;
+      line-height: 1.5;
+  }
 
-mat-card-title {
-    font-size: 24px;
-    font-weight: bold;
-}
+  .chart-container {
+      max-width: 600px;
+      margin: 0 auto;
+  }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    
-}
+  mat-card-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+  }
 
+  .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+  }
+
+  /* Estilos de espaciado y alineación para el layout de tarjetas */
+  .d-flex {
+      display: flex;
+  }
+
+  .justify-content-between {
+      justify-content: space-between;
+  }

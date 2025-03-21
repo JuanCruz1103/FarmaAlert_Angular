@@ -1,34 +1,39 @@
-<div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-4 shadow-lg" style="width: 350px;">
-      <div class="text-center mb-3">
-        <img src="Imagenes\FarmaAlertPNGWhite.svg" alt="Farma Alert" width="100">
-        <h4 class="mt-2">Iniciar sesión</h4>
-      </div>
-  
-      <form>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="ejemplo@gmail.com">
-        </div>
-  
-        <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <div class="input-group">
-              <input [type]="passwordVisible ? 'text' : 'password'" class="form-control" id="password" placeholder="••••••••">
-              <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
-                <i class="bi" [class.bi-eye-slash]="passwordVisible" [class.bi-eye]="!passwordVisible"></i>
-              </button>
-            </div>
-          </div>
-  
-        <button class="btn btn-danger w-100" routerLink="/dashboard" routerLinkActive="active" >Iniciar sesión</button>
-  
-        <div class="text-center mt-3">
-          <a routerLink="/ RecuperarContrasena" routerLinkActive="active">¿Olvidaste tu contraseña?</a> 
-        </div>
-        <div class="text-center-mt-3">
-          <a routerLink="/register" routerLinkActive="active">Registrarse</a>
-        </div>
-      </form>
+<div class="login-container">
+  <div class="card p-4 shadow-lg login-card">
+    <div class="text-center mb-3">
+      <img src="Imagenes\FarmaAlertPNGWhite.svg" alt="Farma Alert" width="100">
+      <h4 class="mt-2">Iniciar sesión</h4>
     </div>
+
+    <form>
+      <!-- Campo de Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="ejemplo@gmail.com">
+      </div>
+
+      <!-- Campo de Contraseña -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <div class="input-group">
+          <input [type]="passwordVisible ? 'text' : 'password'" class="form-control" id="password" placeholder="••••••••">
+          <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+            <i class="bi" [class.bi-eye-slash]="passwordVisible" [class.bi-eye]="!passwordVisible"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Botón de Iniciar Sesión -->
+      <button class="btn btn-danger w-100" routerLink="/dashboard" routerLinkActive="active">Iniciar sesión</button>
+
+      <!-- Enlaces de recuperación de contraseña y registro -->
+      <div class="text-center mt-3">
+        <a routerLink="/RecuperarContrasena" routerLinkActive="active">¿Olvidaste tu contraseña?</a>
+      </div>
+      <div class="text-center mt-3">
+        <a routerLink="/register" routerLinkActive="active">Registrarse</a>
+      </div>
+    </form>
   </div>
+</div>
+

@@ -1,14 +1,14 @@
 <app-navbar></app-navbar>
 <div class="container mt-4">
-    <mat-card class="shadow">
+  <!-- Tarjetas de Información General -->
+  <div class="d-flex justify-content-between">
+    
+    <mat-card class="shadow custom-card">
       <mat-card-header>
-        <mat-card-title class="text-center">Información General</mat-card-title>
+        <mat-card-title class="text-center">Pacientes</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <mat-list>
-          <mat-list-item>
-            <span class="fw-bold">Proteuses:</span> {{ proteuses }} internados
-          </mat-list-item>
           <mat-list-item>
             <span class="fw-bold">Trabajadores:</span> {{ trabajadores }} trabajadores
           </mat-list-item>
@@ -18,17 +18,51 @@
         </mat-list>
       </mat-card-content>
     </mat-card>
-  
-    <!-- Gráfica de barras -->
-    <mat-card class="mt-4 shadow">
+
+    <mat-card class="shadow custom-card">
       <mat-card-header>
-        <mat-card-title class="text-center">Gráfica de Barras</mat-card-title>
+        <mat-card-title class="text-center">Trabajadores</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div class="chart-container">
-          <canvas #barChartCanvas></canvas>
-        </div>
+        <mat-list>
+          <mat-list-item>
+            <span class="fw-bold">Proteuses:</span> {{ proteuses }} internados
+          </mat-list-item>
+          <mat-list-item>
+            <span class="fw-bold">Trabajadores:</span> {{ trabajadores }} trabajadores
+          </mat-list-item>
+        </mat-list>
       </mat-card-content>
     </mat-card>
+
+    <mat-card class="shadow custom-card">
+      <mat-card-header>
+        <mat-card-title class="text-center">Información General</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <span class="fw-bold">Proteuses:</span> {{ proteuses }} internados
+          </mat-list-item>
+          <mat-list-item>
+            <span class="fw-bold">Pacillas:</span> {{ pacillas }} cajas
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
   </div>
-  
+
+  <!-- Gráfica de barras -->
+  <mat-card class="mt-4 shadow custom-card">
+    <mat-card-header>
+      <mat-card-title class="text-center">Estadísticas Mensuales</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="chart-container">
+        <canvas #barChartCanvas></canvas>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

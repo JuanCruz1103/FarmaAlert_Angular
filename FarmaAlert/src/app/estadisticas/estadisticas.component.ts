@@ -8,7 +8,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-estadisticas',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatListModule,NavbarComponent],
+  imports: [CommonModule, MatCardModule, MatListModule, NavbarComponent],
   templateUrl: './estadisticas.component.html',
   styleUrl: './estadisticas.component.css',
 })

@@ -6,6 +6,7 @@
   background-color: #f8f9fa;
 }
 
+/* Estilo de la tarjeta de registro */
 .register-card {
   background-color: white;
   padding: 30px;
@@ -14,4 +15,41 @@
   width: 100%;
   max-width: 400px;
   text-align: center;
+}
+
+/* Estilos de los botones de toggling de contraseñas */
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 35%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Espaciado y alineación de las etiquetas y campos del formulario */
+.form-label {
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Estilo de los enlaces de navegación */
+.text-center a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.text-center a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo de los botones */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
 }

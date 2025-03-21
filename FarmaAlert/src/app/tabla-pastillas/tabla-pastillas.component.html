@@ -1,24 +1,24 @@
 <app-navbar></app-navbar>
 <div class="container mt-3">
-    <button class="btn btn-success" (click)="agregar()">➕Agregar</button>
-  
-      <table class="table table-bordered">
+      <button class="btn btn-success" (click)="agregar()">➕ Agregar</button>
+    
+      <table class="table table-bordered mt-3">
         <thead class="table-light">
           <tr>
+            <th>ID</th>
             <th>Medicamento</th>
-            <th>Gramos</th>
-            <th>Fecha de Caducacion</th>
+            <th>Fecha de Caducidad</th>
             <th>Stock</th>
-            <th>editar</th>
+            <th>Editar</th>
             <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>
-            <tr *ngtcs="let pastilla of pastillas">
-            <td>{{pastilla.id }}</td>
-            <td>{{pastilla.nombre }}</td>
-            <td>{{pastilla.edad }}</td>
-            <td>{{pastilla.paciente }}</td>
+          <tr *ngFor="let pastilla of pastillas">
+            <td>{{pastilla.id}}</td>
+            <td>{{pastilla.nombre}}</td>
+            <td>{{pastilla.fechaCaducidad}}</td>
+            <td>{{pastilla.stock}}</td>
             <td>
               <button class="btn btn-warning btn-sm" (click)="editar(pastilla)">✏️</button>
             </td>

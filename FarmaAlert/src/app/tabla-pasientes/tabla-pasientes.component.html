@@ -1,31 +1,31 @@
 <app-navbar></app-navbar>
 <div class="container mt-3">
-  <button class="btn btn-success" (click)="agregar()">➕Agregar</button>
+  <button class="btn btn-success" (click)="agregar()">➕ Agregar</button>
   
-    <table class="table table-bordered">
-      <thead class="table-light">
-        <tr>
-          <th>Pacientes</th>
-          <th>Habitación</th>
-          <th>Medicamentos</th>
-          <th>Detalles</th>
-          <th>editar</th>
-          <th>Eliminar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngtcs="let paciente of Pacientes">
-          <td>{{ paciente.pacientes }}</td>
-          <td>{{ paciente.habitacion }}</td>
-          <td>{{ paciente.medicamentos }}</td>
-          <td>{{ paciente.detalles }}</td>
-          <td>
-            <button class="btn btn-warning btn-sm" (click)="editar(paciente)">✏️</button>
-          </td>
-          <td>
-            <button class="btn btn-danger btn-sm" (click)="eliminar(paciente.id)">🗑️</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Pacientes</th>
+        <th>Habitación</th>
+        <th>Medicamentos</th>
+        <th>Detalles</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paciente of pacientes">
+        <td>{{ paciente.pacientes }}</td>
+        <td>{{ paciente.habitacion }}</td>
+        <td>{{ paciente.medicamentos }}</td>
+        <td>{{ paciente.detalles }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="editar(paciente)">✏️</button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="eliminar(paciente.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

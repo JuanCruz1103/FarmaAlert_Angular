@@ -1,19 +1,31 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-tabla-pasientes',
-  imports: [NavbarComponent],
+  standalone: true,
+  imports: [NavbarComponent, CommonModule],
   templateUrl: './tabla-pasientes.component.html',
-  styleUrl: './tabla-pasientes.component.css'
+  styleUrls: ['./tabla-pasientes.component.css'],
 })
 export class TablaPasientesComponent {
-
   // Datos de ejemplo
   pacientes = [
-    { id: 1, pacientes: 'Juan Pérez', habitacion: '101', medicamentos: 'Aspirina, Paracetamol', detalles: 'Paciente con fiebre' },
-    { id: 2, pacientes: 'Ana López', habitacion: '102', medicamentos: 'Ibuprofeno', detalles: 'Dolor de cabeza' }
+    {
+      id: 1,
+      pacientes: 'Juan Pérez',
+      habitacion: '101',
+      medicamentos: 'Aspirina, Paracetamol',
+      detalles: 'Paciente con fiebre',
+    },
+    {
+      id: 2,
+      pacientes: 'Ana López',
+      habitacion: '102',
+      medicamentos: 'Ibuprofeno',
+      detalles: 'Dolor de cabeza',
+    },
   ];
 
   agregar() {
@@ -24,10 +36,10 @@ export class TablaPasientesComponent {
       pacientes: 'Nuevo Paciente',
       habitacion: '105',
       medicamentos: 'Ninguno',
-      detalles: 'Sin detalles'
+      detalles: 'Sin detalles',
     });
   }
-  
+
   editar(paciente: any) {
     alert(`Editar paciente: ${paciente.pacientes}`);
     // Lógica de edición
@@ -35,7 +47,7 @@ export class TablaPasientesComponent {
 
   eliminar(id: number) {
     if (confirm('¿Estás seguro de eliminar este paciente?')) {
-      this.pacientes = this.pacientes.filter(p => p.id !== id);
+      this.pacientes = this.pacientes.filter((p) => p.id !== id);
     }
   }
 }
