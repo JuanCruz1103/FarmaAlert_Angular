@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { RegisterComponent } from '../register/register.component';
-
+import { Router, RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [RegisterComponent],
+  imports: [RouterLink, RouterOutlet, RouterLinkActive, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

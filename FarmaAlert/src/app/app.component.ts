@@ -1,7 +1,8 @@
 // app.component.ts
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -58,5 +59,21 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class AppComponent {
-  title = 'farma-alert';
-} 
+  showSidebar = true;
+  
+  constructor(private router: Router) {
+    // Detectar cambios en la ruta para determinar si mostrar la barra lateral
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      const routePath = event.urlAfterRedirects;
+      this.showSidebar = !this.isNoSidebarRoute(routePath);
+    });
+  }
+  
+  private isNoSidebarRoute(route: string): boolean {
+    // Rutas donde no queremos mostrar la barra lateral
+    const noSidebarRoutes = ['/register', '/RecuperarContrasena', '/login'];
+    return noSidebarRoutes.some(path => route.startsWith(path));
+  }
+}
