@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 
 @Component({
   selector: 'app-tabla-pastillas',
-  imports: [],
+  imports: [NavbarComponent],
   templateUrl: './tabla-pastillas.component.html',
   styleUrl: './tabla-pastillas.component.css'
 })

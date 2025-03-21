@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 
 @Component({
   selector: 'app-tabla-trabajadores',
-  imports: [],
+  imports: [NavbarComponent],
   templateUrl: './tabla-trabajadores.component.html',
   styleUrl: './tabla-trabajadores.component.css'
 })

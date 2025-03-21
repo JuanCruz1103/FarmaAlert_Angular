@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import Chart from 'chart.js/auto';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-estadisticas',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatListModule],
+  imports: [CommonModule, MatCardModule, MatListModule,NavbarComponent],
   templateUrl: './estadisticas.component.html',
   styleUrl: './estadisticas.component.css',
 })
