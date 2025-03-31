@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { AddPastillaModalComponent } from '../agregar-pastilla-modal/agrgar-pastilla-modal.component';
+import { EditPastillaModalComponent } from '../modificar-pastilla-modal/modificar-pastilla-modal.component';
+import { DeletePastillaModalComponent } from '../eliminar-pastilla-modal/eliminar-pastilla-modal.component';
 
 
 @Component({
@@ -11,6 +14,42 @@ import { CommonModule } from '@angular/common';
   templateUrl: './tabla-pastillas.component.html',
   styleUrl: './tabla-pastillas.component.css',
 })
+export class SomeComponent {
+  constructor(public dialog: MatDialog) {}
+
+  openAddPatientModal() {
+    const dialogRef = this.dialog.open(AddPastillaModalComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Pastilla agregada:', result);
+      }
+    });
+export class SomeComponent {
+  constructor(public dialog: MatDialog) {}
+    
+  openEditPatientModal(patient: any) {
+    const dialogRef = this.dialog.open(EditPastillaModalComponent, {
+      data: patient
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+            console.log('Paciente modificado:', result);
+          }
+        });
+export class SomeComponent {
+  constructor(public dialog: MatDialog) {}
+        
+  openDeletePatientModal(patient: any) {
+      const dialogRef = this.dialog.open(DeletePastillaModalComponent, {
+      data: patient
+       });
+        
+            dialogRef.afterClosed().subscribe(result => {
+              if (result) {
+                console.log('Paciente eliminado:', patient);
+              }
+            });
 export class TablaPastillasComponent {
   pastillas = [
     { id: 1, nombre: 'Aspirina', fechaCaducidad: '2025-12-01', stock: 150 },

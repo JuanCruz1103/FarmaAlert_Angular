@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { AddTrabajadorModalComponent } from '../agregar-trabajador-modal/agregar-trabajador-modal.component';
+import { EditTrabajadorModalComponent } from '../modificar-trabajador-modal/modificar-trabajador-modal.component';
+import { DeleteTrabajadorModalComponent } from '../eliminar-trabajador-modal/eliminar-trabajador-modal.component';
 
 @Component({
   selector: 'app-tabla-trabajadores',
@@ -8,6 +11,42 @@ import { CommonModule } from '@angular/common';
   templateUrl: './tabla-trabajadores.component.html',
   styleUrl: './tabla-trabajadores.component.css',
 })
+export class SomeComponent {
+  constructor(public dialog: MatDialog) {}
+
+  openAddPatientModal() {
+    const dialogRef = this.dialog.open(AddTrabajadorModalComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Trabajador agregado:', result);
+      }
+    });
+export class SomeComponent {
+  constructor(public dialog: MatDialog) {}
+    
+  openEditPatientModal(patient: any) {
+    const dialogRef = this.dialog.open(EditTrabajadorModalComponent, {
+      data: patient
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+            console.log('Paciente modificado:', result);
+          }
+        });
+export class SomeComponent {
+  constructor(public dialog: MatDialog) {}
+        
+  openDeletePatientModal(patient: any) {
+      const dialogRef = this.dialog.open(DeleteTrabajadorModalComponent, {
+      data: patient
+       });
+        
+            dialogRef.afterClosed().subscribe(result => {
+              if (result) {
+                console.log('Paciente eliminado:', patient);
+              }
+            });
 export class TablaTrabajadoresComponent {
   // Lista de trabajadores
   trabajadores = [

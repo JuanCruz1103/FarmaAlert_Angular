@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Agregar Paciente</h2>
+<mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Pacientes</mat-label>
+      <input matInput [(ngModel)]="patient.nombre" name="nombre" required>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Habitación</mat-label>
+      <input matInput  [(ngModel)]="patient.habitacion" name="habitacion" required>
+    </mat-form-field>
+    
+    <mat-form-field>
+        <mat-label>Medicamentos</mat-label>
+        <input matInput [(ngModel)]="patient.medicamentos" name="medicamentos" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Detalles</mat-label>
+        <input matInput [(ngModel)]="patient.detalles" name="detalles" required>
+      </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onSubmit()" cdkFocusInitial>Agregar</button>
+</mat-dialog-actions>

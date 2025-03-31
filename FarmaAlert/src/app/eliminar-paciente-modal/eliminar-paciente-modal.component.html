@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Eliminar Paciente</h2>
+<mat-dialog-content>
+  <p>¿Está seguro de que desea eliminar al paciente <strong>{{ data.name }}</strong>?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button color="warn" (click)="onConfirm()" cdkFocusInitial>Eliminar</button>
+</mat-dialog-actions>
