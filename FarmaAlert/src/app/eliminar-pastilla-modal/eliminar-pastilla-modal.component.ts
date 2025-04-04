@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA,MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-eliminar-pastilla-modal',
   templateUrl: './eliminar-pastilla-modal.component.html',
+  imports:[MatDialogModule],
   styleUrls: ['./eliminar-pastilla-modal.component.css']
 })
 export class DeletePastillaModalComponent {

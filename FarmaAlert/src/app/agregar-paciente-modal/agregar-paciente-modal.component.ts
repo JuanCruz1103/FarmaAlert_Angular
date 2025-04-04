@@ -1,9 +1,19 @@
+import { NgModule } from '@angular/core';
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import{MatInputModule} from '@angular/material/input'
 
 @Component({
   selector: 'app-agregar-paciente-modal',
   templateUrl: './agregar-paciente-modal.component.html',
+  imports: [
+    FormsModule,        
+    MatDialogModule,    
+    MatFormFieldModule, 
+    MatInputModule      
+  ],
   styleUrls: ['./agregar-paciente-modal.component.css']
 })
 export class AddPatientModalComponent {

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AddPastillaModalComponent } from '../agregar-pastilla-modal/agrgar-pastilla-modal.component';
 import { EditPastillaModalComponent } from '../modificar-pastilla-modal/modificar-pastilla-modal.component';
 import { DeletePastillaModalComponent } from '../eliminar-pastilla-modal/eliminar-pastilla-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -14,42 +15,9 @@ import { DeletePastillaModalComponent } from '../eliminar-pastilla-modal/elimina
   templateUrl: './tabla-pastillas.component.html',
   styleUrl: './tabla-pastillas.component.css',
 })
-export class SomeComponent {
-  constructor(public dialog: MatDialog) {}
 
-  openAddPatientModal() {
-    const dialogRef = this.dialog.open(AddPastillaModalComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Pastilla agregada:', result);
-      }
-    });
-export class SomeComponent {
-  constructor(public dialog: MatDialog) {}
-    
-  openEditPatientModal(patient: any) {
-    const dialogRef = this.dialog.open(EditPastillaModalComponent, {
-      data: patient
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-            console.log('Paciente modificado:', result);
-          }
-        });
-export class SomeComponent {
-  constructor(public dialog: MatDialog) {}
-        
-  openDeletePatientModal(patient: any) {
-      const dialogRef = this.dialog.open(DeletePastillaModalComponent, {
-      data: patient
-       });
-        
-            dialogRef.afterClosed().subscribe(result => {
-              if (result) {
-                console.log('Paciente eliminado:', patient);
-              }
-            });
+
 export class TablaPastillasComponent {
   pastillas = [
     { id: 1, nombre: 'Aspirina', fechaCaducidad: '2025-12-01', stock: 150 },
@@ -73,6 +41,7 @@ export class TablaPastillasComponent {
       stock: 120,
     },
   ];
+  dialog: any;
 
   agregar() {
     alert('Agregar Pastilla');
@@ -87,4 +56,35 @@ export class TablaPastillasComponent {
       this.pastillas = this.pastillas.filter((t) => t.id !== id);
     }
   }
+  openAddPastillaModal() {
+    const dialogRef = this.dialog.open(AddPastillaModalComponent);
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        console.log('Pastilla agregada:', result);
+      }
+    });
+}
+openEditPastillaModal(patient: any) {
+  const dialogRef = this.dialog.open(EditPastillaModalComponent, {
+    data: patient
+      });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+          console.log('Paciente modificado:', result);
+        }
+      });
+
+}
+openDeletePastillaModal(patient: any) {
+  const dialogRef = this.dialog.open(DeletePastillaModalComponent, {
+  data: patient
+   });
+    
+        dialogRef.afterClosed().subscribe((result: any) => {
+          if (result) {
+            console.log('Paciente eliminado:', patient);
+          }
+        });
+}
 }

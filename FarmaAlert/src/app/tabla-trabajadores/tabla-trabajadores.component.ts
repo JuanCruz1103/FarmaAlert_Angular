@@ -4,49 +4,14 @@ import { CommonModule } from '@angular/common';
 import { AddTrabajadorModalComponent } from '../agregar-trabajador-modal/agregar-trabajador-modal.component';
 import { EditTrabajadorModalComponent } from '../modificar-trabajador-modal/modificar-trabajador-modal.component';
 import { DeleteTrabajadorModalComponent } from '../eliminar-trabajador-modal/eliminar-trabajador-modal.component';
-
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-tabla-trabajadores',
   imports: [NavbarComponent, CommonModule],
   templateUrl: './tabla-trabajadores.component.html',
   styleUrl: './tabla-trabajadores.component.css',
 })
-export class SomeComponent {
-  constructor(public dialog: MatDialog) {}
 
-  openAddPatientModal() {
-    const dialogRef = this.dialog.open(AddTrabajadorModalComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Trabajador agregado:', result);
-      }
-    });
-export class SomeComponent {
-  constructor(public dialog: MatDialog) {}
-    
-  openEditPatientModal(patient: any) {
-    const dialogRef = this.dialog.open(EditTrabajadorModalComponent, {
-      data: patient
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-            console.log('Paciente modificado:', result);
-          }
-        });
-export class SomeComponent {
-  constructor(public dialog: MatDialog) {}
-        
-  openDeletePatientModal(patient: any) {
-      const dialogRef = this.dialog.open(DeleteTrabajadorModalComponent, {
-      data: patient
-       });
-        
-            dialogRef.afterClosed().subscribe(result => {
-              if (result) {
-                console.log('Paciente eliminado:', patient);
-              }
-            });
 export class TablaTrabajadoresComponent {
   // Lista de trabajadores
   trabajadores = [
@@ -55,6 +20,7 @@ export class TablaTrabajadoresComponent {
     { id: 3, nombre: 'Pedro Ramírez', edad: 40, paciente: 'Ana López' },
     { id: 4, nombre: 'Sofía Martínez', edad: 32, paciente: 'Roberto Díaz' },
   ];
+  dialog: any;
   agregar() {
     alert('Agregar trabajador');
   }
@@ -69,5 +35,37 @@ export class TablaTrabajadoresComponent {
     if (confirm('¿Estás seguro de eliminar este trabajador?')) {
       this.trabajadores = this.trabajadores.filter((t) => t.id !== id);
     }
+  }
+
+  openAddTrabajadorModal() {
+    const dialogRef = this.dialog.open(AddTrabajadorModalComponent);
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        console.log('Trabajador agregado:', result);
+      }
+    });
+  }
+        
+  openDeleteTrabajadorModal(trabajador: any) {
+      const dialogRef = this.dialog.open(DeleteTrabajadorModalComponent, {
+      data: trabajador
+       });
+        
+            dialogRef.afterClosed().subscribe((result: any) => {
+              if (result) {
+                console.log('Trabajador eliminado:', trabajador);
+              }
+            });
+    }
+  openEditTrabajadorModal(trabajador: any) {
+    const dialogRef = this.dialog.open(EditTrabajadorModalComponent, {
+      data: trabajador
+          });
+        dialogRef.afterClosed().subscribe((result: any) => {
+          if (result) {
+              console.log('Trabajador modificado:', result);
+            }
+          });
   }
 }

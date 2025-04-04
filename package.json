@@ -2,5 +2,8 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.8"
+  },
+  "devDependencies": {
+    "tslib": "^2.8.1"
   }
 }

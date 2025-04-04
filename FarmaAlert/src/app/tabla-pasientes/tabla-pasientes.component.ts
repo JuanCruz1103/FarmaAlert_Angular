@@ -14,42 +14,7 @@ import { DeletePatientModalComponent } from '../eliminar-paciente-modal/eliminar
   templateUrl: './tabla-pasientes.component.html',
   styleUrls: ['./tabla-pasientes.component.css'],
 })
-export class SomeComponent {
-  constructor(public dialog: MatDialog) {}
 
-  openAddPatientModal() {
-    const dialogRef = this.dialog.open(AddPatientModalComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Paciente agregado:', result);
-      }
-    });
-export class SomeComponent {
-  constructor(public dialog: MatDialog) {}
-    
-  openEditPatientModal(patient: any) {
-    const dialogRef = this.dialog.open(EditPatientModalComponent, {
-      data: patient
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-            console.log('Paciente modificado:', result);
-          }
-        });
-export class SomeComponent {
-  constructor(public dialog: MatDialog) {}
-        
-  openDeletePatientModal(patient: any) {
-      const dialogRef = this.dialog.open(DeletePatientModalComponent, {
-      data: patient
-       });
-        
-            dialogRef.afterClosed().subscribe(result => {
-              if (result) {
-                console.log('Paciente eliminado:', patient);
-              }
-            });
 export class TablaPasientesComponent {
   // Datos de ejemplo
   pacientes = [
@@ -68,6 +33,7 @@ export class TablaPasientesComponent {
       detalles: 'Dolor de cabeza',
     },
   ];
+  dialog: any;
 
   agregar() {
     alert('Agregar paciente');
@@ -91,7 +57,36 @@ export class TablaPasientesComponent {
       this.pacientes = this.pacientes.filter((p) => p.id !== id);
     }
   }
+  openAddPacienteModal() {
+    const dialogRef = this.dialog.open(AddPatientModalComponent);
 
-  
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        console.log('Paciente agregado:', result);
+      }
+    });
+  }
+
+  openEditPacienteModal(patient: any) {
+    const dialogRef = this.dialog.open(EditPatientModalComponent, {
+      data: patient
+        });
+      dialogRef.afterClosed().subscribe((result: any) => {
+        if (result) {
+            console.log('Paciente modificado:', result);
+          }
+        });
+}
+openDeletePatientModal(patient: any) {
+  const dialogRef = this.dialog.open(DeletePatientModalComponent, {
+  data: patient
+   });
+    
+        dialogRef.afterClosed().subscribe((result: any) => {
+          if (result) {
+            console.log('Paciente eliminado:', patient);
+          }
+        });
+  }
 }
 
