@@ -1,68 +1,90 @@
 <app-navbar></app-navbar>
 <div class="container mt-4">
-  <!-- Tarjetas de Información General -->
-  <div class="d-flex justify-content-between">
-    
-    <mat-card class="shadow custom-card">
-      <mat-card-header>
-        <mat-card-title class="text-center">Pacientes</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item>
-            <span class="fw-bold">Trabajadores:</span> {{ trabajadores }} trabajadores
-          </mat-list-item>
-          <mat-list-item>
-            <span class="fw-bold">Pacillas:</span> {{ pacillas }} cajas
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="shadow custom-card">
-      <mat-card-header>
-        <mat-card-title class="text-center">Trabajadores</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item>
-            <span class="fw-bold">Proteuses:</span> {{ proteuses }} internados
-          </mat-list-item>
-          <mat-list-item>
-            <span class="fw-bold">Trabajadores:</span> {{ trabajadores }} trabajadores
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="shadow custom-card">
-      <mat-card-header>
-        <mat-card-title class="text-center">Información General</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item>
-            <span class="fw-bold">Proteuses:</span> {{ proteuses }} internados
-          </mat-list-item>
-          <mat-list-item>
-            <span class="fw-bold">Pacillas:</span> {{ pacillas }} cajas
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
-
+  <!-- Loading indicator -->
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p class="mt-2">Cargando estadísticas...</p>
   </div>
 
-  <!-- Gráfica de barras -->
-  <mat-card class="mt-4 shadow custom-card">
-    <mat-card-header>
-      <mat-card-title class="text-center">Estadísticas Mensuales</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="chart-container">
-        <canvas #barChartCanvas></canvas>
-      </div>
-    </mat-card-content>
-  </mat-card>
+  <!-- Content when loaded -->
+  <div *ngIf="!isLoading">
+    <!-- Tarjetas de Información General -->
+    <div class="d-flex justify-content-between">
+      
+      <mat-card class="shadow custom-card">
+        <mat-card-header>
+          <mat-card-title class="text-center">Pacientes</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>
+              <div matListItemLine>
+                <span class="fw-bold">Pacientes:</span> {{ Pacientes }} pacientes
+              </div>
+            </mat-list-item>
+            <mat-list-item>
+              <div matListItemLine>
+                <span class="fw-bold">Medicamentos:</span> {{ Pastillas }} cajas
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
 
+      <mat-card class="shadow custom-card">
+        <mat-card-header>
+          <mat-card-title class="text-center">Trabajadores</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>
+              <div matListItemLine>
+                <span class="fw-bold">Total:</span> {{ trabajadores }} trabajadores
+              </div>
+            </mat-list-item>
+            <mat-list-item>
+              <div matListItemLine>
+                <span class="fw-bold">Pacientes:</span> {{ Pacientes }} pacientes
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="shadow custom-card">
+        <mat-card-header>
+          <mat-card-title class="text-center">Información General</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>
+              <div matListItemLine>
+                <span class="fw-bold">Pacientes:</span> {{ Pacientes }} internados
+              </div>
+            </mat-list-item>
+            <mat-list-item>
+              <div matListItemLine>
+                <span class="fw-bold">Medicamentos:</span> {{ Pastillas }} cajas
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+    <!-- Gráfica de barras -->
+    <mat-card class="mt-4 shadow custom-card">
+      <mat-card-header>
+        <mat-card-title class="text-center">Estadísticas Generales</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-container">
+          <canvas #barChartCanvas></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

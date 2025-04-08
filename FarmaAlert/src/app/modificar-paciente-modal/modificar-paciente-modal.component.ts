@@ -9,8 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   imports: [
     FormsModule,        // <-- Necesario para [(ngModel)]
     MatDialogModule,    // <-- Necesario para <mat-dialog-content>
-    MatFormFieldModule, // <-- Necesario para <mat-form-field>
-    
+    MatFormFieldModule, // <-- Necesario para <mat-form-field>  
   ],
   styleUrls: ['./modificar-paciente-modal.component.css']
 })

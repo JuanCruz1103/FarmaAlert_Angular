@@ -1,31 +1,47 @@
 <app-navbar></app-navbar>
+
 <div class="container mt-3">
-      <button class="btn btn-success" (click)="agregar()">➕ Agregar</button>
-    
-      <table class="table table-bordered mt-3">
-        <thead class="table-light">
-          <tr>
-            <th>ID</th>
-            <th>Medicamento</th>
-            <th>Fecha de Caducidad</th>
-            <th>Stock</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let pastilla of pastillas">
-            <td>{{pastilla.id}}</td>
-            <td>{{pastilla.nombre}}</td>
-            <td>{{pastilla.fechaCaducidad}}</td>
-            <td>{{pastilla.stock}}</td>
-            <td>
-              <button class="btn btn-warning btn-sm" (click)="editar(pastilla)">✏️</button>
-            </td>
-            <td>
-              <button class="btn btn-danger btn-sm" (click)="eliminar(pastilla.id)">🗑️</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <button class="btn btn-success" (click)="agregar()">➕ Agregar</button>
+
+  <div *ngIf="isLoading" class="d-flex justify-content-center mt-4">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Cargando...</span>
     </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger mt-3" role="alert">
+    {{ error }}
+    <button type="button" class="btn-close float-end" (click)="error = null"></button>
+  </div>
+
+  <table *ngIf="!isLoading && pastillas.length > 0" class="table table-bordered mt-3">
+    <thead class="table-light">
+      <tr>
+        <th>ID</th>
+        <th>Medicamento</th>
+        <th>Fecha de Caducidad</th>
+        <th>Stock</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pastilla of pastillas">
+        <td>{{ pastilla.idMedicamento }}</td>
+        <td>{{ pastilla.nombreMedicamento }}</td>
+        <td>{{ pastilla.fechaCaducidad | date:'dd/MM/yyyy' }}</td>
+        <td>{{ pastilla.cantidad }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="editar(pastilla)">✏️</button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="eliminar(pastilla.idMedicamento)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!isLoading && pastillas.length === 0 && !error" class="alert alert-info mt-3">
+    No hay medicamentos registrados. Agrega uno nuevo.
+  </div>
+</div>

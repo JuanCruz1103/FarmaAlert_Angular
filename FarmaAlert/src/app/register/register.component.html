@@ -1,47 +1,103 @@
 <div class="register-container">
-<div class="register-card">
-  <img src="Imagenes\FarmaAlertPNGWhite.svg" alt="Farma Alert" width="100" height="100">
-  <h2 class="mb-4">Crear Cuenta</h2>
+  <div class="register-card">
+    <img src="Imagenes\FarmaAlertPNGWhite.svg" alt="Farma Alert" width="100" height="100">
+    <h2 class="mb-4">Crear Cuenta</h2>
+    
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+      <!-- Nombre Completo -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre completo</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="name" 
+          formControlName="nombre"
+          placeholder="Juan Pérez"
+          [ngClass]="{'is-invalid': registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched}">
+        <div class="invalid-feedback" *ngIf="registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched">
+          El nombre es obligatorio
+        </div>
+      </div>
 
-  <!-- Nombre Completo -->
-  <div class="mb-3">
-    <label for="name" class="form-label">Nombre completo</label>
-    <input type="text" class="form-control" id="name" placeholder="Juan Pérez">
-  </div>
+      <!-- Correo Electrónico -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input 
+          type="email" 
+          class="form-control" 
+          id="email" 
+          formControlName="email"
+          placeholder="nombre@ejemplo.com"
+          [ngClass]="{'is-invalid': registroForm.get('email')?.invalid && registroForm.get('email')?.touched}">
+        <div class="invalid-feedback" *ngIf="registroForm.get('email')?.invalid && registroForm.get('email')?.touched">
+          <span *ngIf="registroForm.get('email')?.errors?.['required']">El email es obligatorio</span>
+          <span *ngIf="registroForm.get('email')?.errors?.['email']">Email no válido</span>
+        </div>
+      </div>
 
-  <!-- Correo Electrónico -->
-  <div class="mb-3">
-    <label for="email" class="form-label">Correo electrónico</label>
-    <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com">
-  </div>
+      <!-- Contraseña -->
+      <div class="mb-3 position-relative">
+        <label for="password" class="form-label">Contraseña</label>
+        <div class="input-group">
+          <input 
+            [type]="passwordVisible ? 'text' : 'password'" 
+            class="form-control" 
+            id="password" 
+            formControlName="contrasena"
+            placeholder="Contraseña"
+            [ngClass]="{'is-invalid': registroForm.get('contrasena')?.invalid && registroForm.get('contrasena')?.touched}">
+          <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+            <i class="bi" [ngClass]="passwordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+          </button>
+        </div>
+        <div class="invalid-feedback" *ngIf="registroForm.get('contrasena')?.invalid && registroForm.get('contrasena')?.touched">
+          <span *ngIf="registroForm.get('contrasena')?.errors?.['required']">La contraseña es obligatoria</span>
+          <span *ngIf="registroForm.get('contrasena')?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</span>
+        </div>
+      </div>
 
-  <!-- Contraseña -->
-  <div class="mb-3 position-relative">
-    <label for="password" class="form-label">Contraseña</label>
-    <input type="password" class="form-control" id="password" placeholder="Contraseña">
-    <button type="button" class="btn btn-outline-secondary password-toggle" (click)="togglePasswordVisibility()">
-      <i class="bi" [class.bi-eye-slash]="passwordVisible" [class.bi-eye]="!passwordVisible"></i>
-    </button>
-  </div>
+      <!-- Confirmar Contraseña -->
+      <div class="mb-3 position-relative">
+        <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+        <div class="input-group">
+          <input 
+            [type]="confirmPasswordVisible ? 'text' : 'password'" 
+            class="form-control" 
+            id="confirmPassword" 
+            formControlName="confirmarContrasena"
+            placeholder="Confirmar Contraseña"
+            [ngClass]="{'is-invalid': (registroForm.get('confirmarContrasena')?.invalid || registroForm.hasError('noCoinciden')) && registroForm.get('confirmarContrasena')?.touched}">
+          <button type="button" class="btn btn-outline-secondary" (click)="toggleConfirmPasswordVisibility()">
+            <i class="bi" [ngClass]="confirmPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+          </button>
+        </div>
+        <div class="invalid-feedback" *ngIf="(registroForm.get('confirmarContrasena')?.invalid || registroForm.hasError('noCoinciden')) && registroForm.get('confirmarContrasena')?.touched">
+          <span *ngIf="registroForm.get('confirmarContrasena')?.errors?.['required']">Confirmar contraseña es obligatorio</span>
+          <span *ngIf="registroForm.hasError('noCoinciden')">Las contraseñas no coinciden</span>
+        </div>
+      </div>
 
-  <!-- Confirmar Contraseña -->
-  <div class="mb-3 position-relative">
-    <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
-    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmar Contraseña">
-    <button type="button" class="btn btn-outline-secondary password-toggle" (click)="togglePasswordVisibility()">
-      <i class="bi" [class.bi-eye-slash]="passwordVisible" [class.bi-eye]="!passwordVisible"></i>
-    </button>
-  </div>
+      <!-- Mensaje de error -->
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
 
-  <!-- Botón de Registro -->
-  <div class="d-grid gap-2">
-    <button class="btn btn-primary" routerLink="/login" routerLinkActive="true">Registrarse</button>
-  </div>
+      <!-- Botón de Registro -->
+      <div class="d-grid gap-2">
+        <button 
+          type="submit" 
+          class="btn btn-primary"
+          [disabled]="registroForm.invalid || isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          Registrarse
+        </button>
+      </div>
 
-  <!-- Enlace para ir al inicio de sesión -->
-  <div class="mt-3 text-center">
-    <span>¿Ya tienes cuenta? </span>
-    <a routerLink="/login" routerLinkActive="true" class="text-decoration-none">Iniciar sesión</a>
+      <!-- Enlace para ir al inicio de sesión -->
+      <div class="mt-3 text-center">
+        <span>¿Ya tienes cuenta? </span>
+        <a routerLink="/login" routerLinkActive="true" class="text-decoration-none">Iniciar sesión</a>
+      </div>
+    </form>
   </div>
-</div>
 </div>

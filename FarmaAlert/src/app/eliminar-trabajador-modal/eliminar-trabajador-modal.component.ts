@@ -1,12 +1,16 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-eliminar-trabajador-modal',
+  standalone: true,
   templateUrl: './eliminar-trabajador-modal.component.html',
   imports: [MatDialogModule],
-  styleUrls: ['./eliminar-trabajador-modal.component.css']
+  styleUrls: ['./eliminar-trabajador-modal.component.css'],
 })
 export class DeleteTrabajadorModalComponent {
   constructor(
@@ -15,10 +19,10 @@ export class DeleteTrabajadorModalComponent {
   ) {}
 
   onConfirm(): void {
-    this.dialogRef.close(true); 
+    this.dialogRef.close(true);
   }
 
   onCancel(): void {
-    this.dialogRef.close(false); 
+    this.dialogRef.close(false);
   }
 }

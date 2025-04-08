@@ -1,21 +1,40 @@
 <div class="Codigocontraseña-container">
-    <div class="Codigocontraseña-card">
-        <img src="/Imagenes/FarmaAlertPNGWhite.svg" width="200px" class="mb-4" alt="Logo">
-        <h2 class="mb-4">¿Olvidaste tu contaseña?</h2>
-        
-        <div class="mb-3">
-          <label for="Codigo" class="form-label">Codigo</label>
-          <input type="number" class="form-control" id="Codigorecuperarcontra">
+  <div class="Codigocontraseña-card">
+    <img src="/Imagenes/FarmaAlertPNGWhite.svg" width="200px" class="mb-4" alt="Logo">
+    <h2 class="mb-4">Verificación de código</h2>
+    
+    <form [formGroup]="codigoForm">
+      <div class="mb-3">
+        <label for="Codigo" class="form-label">Código de verificación</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="Codigorecuperarcontra" 
+          formControlName="codigo"
+          maxlength="6"
+          [ngClass]="{'is-invalid': codigoForm.get('codigo')?.invalid && codigoForm.get('codigo')?.touched}">
+        <div class="invalid-feedback" *ngIf="codigoForm.get('codigo')?.invalid && codigoForm.get('codigo')?.touched">
+          <span *ngIf="codigoForm.get('codigo')?.errors?.['required']">El código es obligatorio</span>
+          <span *ngIf="codigoForm.get('codigo')?.errors?.['minlength']">El código debe tener 6 caracteres</span>
         </div>
-        
-        <div class="mensaje">
-            <span class="texto">¿No recibiste el código?</span>
-            <span class="temporizador">{{ tiempoRestante }}s</span>
-        </div>
+      </div>
       
-        <div class="botones">
-          <button class="btn cancelar" (click)="cancelar()">Cancelar</button>
-          <button class="btn confirmar" (click)="confirmar()">Confirmar</button>
-        </div>
+      <!-- Mensajes de error -->
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      
+      <div class="mensaje">
+        <span class="texto">¿No recibiste el código?</span>
+        <span class="temporizador" *ngIf="tiempoRestante > 0">{{ tiempoRestante }}s</span>
+        <a href="javascript:void(0)" *ngIf="tiempoRestante === 0" (click)="reenviarCodigo()">Reenviar código</a>
+      </div>
+    </form>
+    
+    <div class="botones">
+      <button class="btn cancelar" (click)="cancelar()" [disabled]="isLoading">Cancelar</button>
+      <button class="btn confirmar" (click)="confirmar()" [disabled]="codigoForm.invalid || isLoading">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        Confirmar
+      </button>
     </div>
-</div>

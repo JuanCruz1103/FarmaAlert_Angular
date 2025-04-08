@@ -1,28 +1,36 @@
-<h2 mat-dialog-title>Modificar Paciente</h2>
-<mat-dialog-content>
+<h2 mat-dialog-title style="text-align: center; font-weight: bold; color: #333; font-size: 26px; border-bottom: 3px solid #4CAF50; padding-bottom: 15px; margin-bottom: 20px;">
+  Modificar Paciente
+</h2>
+
+<mat-dialog-content style="padding: 30px; background-color: #f9f9f9; border-radius: 8px;">
   <form>
-    <mat-form-field>
-        <mat-label>Pacientes</mat-label>
-        <input matInput [(ngModel)]="data.nombre" name="nombre" required>
-      </mat-form-field>
-      
-      <mat-form-field>
-        <mat-label>Habitación</mat-label>
-        <input matInput  [(ngModel)]="data.habitacion" name="habitacion" required>
-      </mat-form-field>
-      
-      <mat-form-field>
-          <mat-label>Medicamentos</mat-label>
-          <input matInput [(ngModel)]="data.medicamentos" name="medicamentos" required>
-        </mat-form-field>
-  
-        <mat-form-field>
-          <mat-label>Detalles</mat-label>
-          <input matInput [(ngModel)]="data.detalles" name="detalles" required>
-        </mat-form-field>
+    <mat-form-field style="width: 100%; margin-bottom: 20px;">
+      <mat-label>Nombre del paciente</mat-label>
+      <input matInput [(ngModel)]="data.nombre" name="nombre" required placeholder="Nombre del paciente" style="border-radius: 5px; padding: 10px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%; margin-bottom: 20px;">
+      <mat-label>Número de Habitación</mat-label>
+      <input matInput [(ngModel)]="data.habitacion" name="habitacion" required placeholder="Número de habitación" style="border-radius: 5px; padding: 10px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%; margin-bottom: 20px;">
+      <mat-label>Medicamentos</mat-label>
+      <input matInput [(ngModel)]="data.medicamentos" name="medicamentos" required placeholder="Medicamentos" style="border-radius: 5px; padding: 10px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%; margin-bottom: 20px;">
+      <mat-label>Detalles</mat-label>
+      <input matInput [(ngModel)]="data.detalles" name="detalles" required placeholder="Detalles adicionales" style="border-radius: 5px; padding: 10px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    </mat-form-field>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-button (click)="onSubmit()" cdkFocusInitial>Modificar</button>
+
+<mat-dialog-actions align="end" style="justify-content: center; padding: 15px 30px; background-color: #f9f9f9; border-radius: 8px;">
+  <button mat-button (click)="onCancel()" style="margin-right: 15px; border: 1px solid #ccc; border-radius: 5px; background-color: #f5f5f5; color: #333; padding: 10px 20px; transition: background-color 0.3s;">
+    Cancelar
+  </button>
+  <button mat-button (click)="onSubmit()" cdkFocusInitial style="border: none; border-radius: 5px; background-color: #4CAF50; color: white; padding: 10px 20px; transition: background-color 0.3s;">
+    Modificar
+  </button>
 </mat-dialog-actions>

@@ -1,71 +1,131 @@
-import { Component } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { NavbarComponent } from '../navbar/navbar.component';
 import { AddTrabajadorModalComponent } from '../agregar-trabajador-modal/agregar-trabajador-modal.component';
 import { EditTrabajadorModalComponent } from '../modificar-trabajador-modal/modificar-trabajador-modal.component';
 import { DeleteTrabajadorModalComponent } from '../eliminar-trabajador-modal/eliminar-trabajador-modal.component';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  TrabajadoresService,
+  Trabajador,
+} from '../Services/trabajadores.service';
+
 @Component({
   selector: 'app-tabla-trabajadores',
-  imports: [NavbarComponent, CommonModule],
+  standalone: true,
   templateUrl: './tabla-trabajadores.component.html',
   styleUrl: './tabla-trabajadores.component.css',
+  imports: [
+    CommonModule,
+    NavbarComponent,
+    AddTrabajadorModalComponent,
+    EditTrabajadorModalComponent,
+    DeleteTrabajadorModalComponent,
+  ],
 })
+export class TablaTrabajadoresComponent implements OnInit {
+  trabajadores: Trabajador[] = [];
+  isLoading = false;
+  error: string | null = null;
 
-export class TablaTrabajadoresComponent {
-  // Lista de trabajadores
-  trabajadores = [
-    { id: 1, nombre: 'Carlos Pérez', edad: 34, paciente: 'María Teresa' },
-    { id: 2, nombre: 'Luisa Gómez', edad: 28, paciente: 'José Fernández' },
-    { id: 3, nombre: 'Pedro Ramírez', edad: 40, paciente: 'Ana López' },
-    { id: 4, nombre: 'Sofía Martínez', edad: 32, paciente: 'Roberto Díaz' },
-  ];
-  dialog: any;
+  constructor(
+    private dialog: MatDialog,
+    private trabajadoresService: TrabajadoresService
+  ) {}
+
+  ngOnInit(): void {
+    this.cargarTrabajadores();
+  }
+
+  cargarTrabajadores(): void {
+    this.isLoading = true;
+    this.error = null;
+
+    this.trabajadoresService.getTrabajadores().subscribe({
+      next: (data) => {
+        this.trabajadores = data;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar trabajadores:', err);
+        this.error = 'Error al cargar la lista de trabajadores';
+        this.isLoading = false;
+      },
+    });
+  }
+
   agregar() {
-    alert('Agregar trabajador');
-  }
-
-  // Función para editar un trabajador
-  editar(trabajador: any) {
-    alert(`Editar trabajador: ${trabajador.nombre}`);
-  }
-
-  // Función para eliminar un trabajador
-  eliminar(id: number) {
-    if (confirm('¿Estás seguro de eliminar este trabajador?')) {
-      this.trabajadores = this.trabajadores.filter((t) => t.id !== id);
-    }
-  }
-
-  openAddTrabajadorModal() {
     const dialogRef = this.dialog.open(AddTrabajadorModalComponent);
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        console.log('Trabajador agregado:', result);
+    dialogRef.afterClosed().subscribe((nuevoTrabajador: any) => {
+      if (nuevoTrabajador) {
+        this.isLoading = true;
+
+        const trabajador: Trabajador = {
+          nombre: nuevoTrabajador.nombre,
+          fechaCreacionUsuario: new Date(),
+          email: nuevoTrabajador.email,
+          idUsuario: '',
+          Rol: nuevoTrabajador.Rol="Trabajador",
+          Contrasena: nuevoTrabajador.Contrasena,
+        };
+
+        this.trabajadoresService.createTrabajador(trabajador).subscribe({
+          next: (result) => {
+            console.log('Trabajador agregado:', result);
+            this.cargarTrabajadores(); // Recargar la lista
+          }
+        });
       }
     });
   }
-        
-  openDeleteTrabajadorModal(trabajador: any) {
-      const dialogRef = this.dialog.open(DeleteTrabajadorModalComponent, {
-      data: trabajador
-       });
-        
-            dialogRef.afterClosed().subscribe((result: any) => {
-              if (result) {
-                console.log('Trabajador eliminado:', trabajador);
-              }
-            });
-    }
-  openEditTrabajadorModal(trabajador: any) {
+
+  editar(trabajador: Trabajador) {
     const dialogRef = this.dialog.open(EditTrabajadorModalComponent, {
-      data: trabajador
-          });
-        dialogRef.afterClosed().subscribe((result: any) => {
-          if (result) {
-              console.log('Trabajador modificado:', result);
-            }
-          });
+      data: { ...trabajador }, // Send a copy to avoid direct mutation
+    });
+
+    dialogRef.afterClosed().subscribe((result: Trabajador) => {
+      if (result) {
+        this.isLoading = true;
+
+        this.trabajadoresService.updateTrabajador(result).subscribe({
+          next: (updated) => {
+            console.log('Trabajador modificado:', updated);
+            this.cargarTrabajadores(); // Recargar la lista
+          },
+          error: (err) => {
+            console.error('Error al modificar trabajador:', err);
+            this.error = 'Error al modificar el trabajador';
+            this.isLoading = false;
+          },
+        });
+      }
+    });
+  }
+
+  eliminar(id: string) {
+    const trabajador = this.trabajadores.find((t) => t.idUsuario === id);
+    const dialogRef = this.dialog.open(DeleteTrabajadorModalComponent, {
+      data: trabajador,
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado: boolean) => {
+      if (confirmado) {
+        this.isLoading = true;
+
+        this.trabajadoresService.deleteTrabajador(id).subscribe({
+          next: () => {
+            console.log('Trabajador eliminado con ID:', id);
+            this.cargarTrabajadores(); // Recargar la lista
+          },
+          error: (err) => {
+            console.error('Error al eliminar trabajador:', err);
+            this.error = 'Error al eliminar el trabajador';
+            this.isLoading = false;
+          },
+        });
+      }
+    });
   }
 }

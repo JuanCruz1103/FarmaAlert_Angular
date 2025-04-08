@@ -5,26 +5,57 @@
       <h4 class="mt-2">Iniciar sesión</h4>
     </div>
 
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <!-- Campo de Email -->
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="ejemplo@gmail.com">
+        <input 
+          type="email" 
+          class="form-control" 
+          id="email" 
+          formControlName="email"
+          placeholder="ejemplo@gmail.com"
+          [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+        <div class="invalid-feedback" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          <span *ngIf="loginForm.get('email')?.errors?.['required']">El email es obligatorio</span>
+          <span *ngIf="loginForm.get('email')?.errors?.['email']">Email no válido</span>
+        </div>
       </div>
 
       <!-- Campo de Contraseña -->
       <div class="mb-3">
         <label for="password" class="form-label">Contraseña</label>
         <div class="input-group">
-          <input [type]="passwordVisible ? 'text' : 'password'" class="form-control" id="password" placeholder="••••••••">
+          <input 
+            [type]="passwordVisible ? 'text' : 'password'" 
+            class="form-control" 
+            id="password" 
+            formControlName="contrasena"
+            placeholder="••••••••"
+            [ngClass]="{'is-invalid': loginForm.get('contrasena')?.invalid && loginForm.get('contrasena')?.touched}">
           <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
-            <i class="bi" [class.bi-eye-slash]="passwordVisible" [class.bi-eye]="!passwordVisible"></i>
+            <i class="bi" [ngClass]="passwordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
           </button>
+        </div>
+        <div class="invalid-feedback" *ngIf="loginForm.get('contrasena')?.invalid && loginForm.get('contrasena')?.touched">
+          <span *ngIf="loginForm.get('contrasena')?.errors?.['required']">La contraseña es obligatoria</span>
+          <span *ngIf="loginForm.get('contrasena')?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</span>
         </div>
       </div>
 
+      <!-- Mensaje de error -->
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
       <!-- Botón de Iniciar Sesión -->
-      <button class="btn btn-danger w-100" routerLink="/dashboard" routerLinkActive="active">Iniciar sesión</button>
+      <button 
+        type="submit" 
+        class="btn btn-danger w-100" 
+        [disabled]="loginForm.invalid || isLoading">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        Iniciar sesión
+      </button>
 
       <!-- Enlaces de recuperación de contraseña y registro -->
       <div class="text-center mt-3">
@@ -36,4 +67,3 @@
     </form>
   </div>
 </div>
-

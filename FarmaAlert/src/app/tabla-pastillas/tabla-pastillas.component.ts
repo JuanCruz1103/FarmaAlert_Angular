@@ -1,90 +1,163 @@
-import { Component } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AddPastillaModalComponent } from '../agregar-pastilla-modal/agrgar-pastilla-modal.component';
+import { CommonModule } from '@angular/common';
 import { EditPastillaModalComponent } from '../modificar-pastilla-modal/modificar-pastilla-modal.component';
 import { DeletePastillaModalComponent } from '../eliminar-pastilla-modal/eliminar-pastilla-modal.component';
-import { MatDialog } from '@angular/material/dialog';
-
+import { NavbarComponent } from 'app/navbar/navbar.component';
+import { PastillasService, Pastilla } from '../Services/pastillas.service';
 
 @Component({
   selector: 'app-tabla-pastillas',
-  imports: [CommonModule, NavbarComponent],
+  imports: [
+    CommonModule,
+    NavbarComponent,
+    AddPastillaModalComponent,
+    EditPastillaModalComponent,
+    DeletePastillaModalComponent,
+  ],
   standalone: true,
-  providers: [],
   templateUrl: './tabla-pastillas.component.html',
   styleUrl: './tabla-pastillas.component.css',
 })
+export class TablaPastillasComponent implements OnInit {
+  pastillas: Pastilla[] = [];
+  isLoading = false;
+  error: string | null = null;
 
+  constructor(
+    public dialog: MatDialog,
+    private pastillasService: PastillasService
+  ) {}
 
+  ngOnInit(): void {
+    this.cargarPastillas();
+  }
 
-export class TablaPastillasComponent {
-  pastillas = [
-    { id: 1, nombre: 'Aspirina', fechaCaducidad: '2025-12-01', stock: 150 },
-    { id: 2, nombre: 'Paracetamol', fechaCaducidad: '2026-05-01', stock: 200 },
-    { id: 3, nombre: 'Ibuprofeno', fechaCaducidad: '2025-08-15', stock: 120 },
-    { id: 4, nombre: 'Omeprazol', fechaCaducidad: '2026-03-20', stock: 80 },
-    { id: 5, nombre: 'Amoxicilina', fechaCaducidad: '2026-01-10', stock: 300 },
-    { id: 6, nombre: 'Loratadina', fechaCaducidad: '2025-11-20', stock: 150 },
-    { id: 7, nombre: 'Metformina', fechaCaducidad: '2026-07-30', stock: 200 },
-    { id: 8, nombre: 'Simvastatina', fechaCaducidad: '2025-09-25', stock: 90 },
-    {
-      id: 9,
-      nombre: 'Ciprofloxacino',
-      fechaCaducidad: '2026-02-15',
-      stock: 60,
-    },
-    {
-      id: 10,
-      nombre: 'Atorvastatina',
-      fechaCaducidad: '2025-06-05',
-      stock: 120,
-    },
-  ];
-  dialog: any;
+  cargarPastillas(): void {
+    this.isLoading = true;
+    this.error = null;
+
+    this.pastillasService.getPastillas().subscribe({
+      next: (data) => {
+        this.pastillas = data;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar medicamentos:', err);
+        this.error = 'Error al cargar la lista de medicamentos';
+        this.isLoading = false;
+      },
+    });
+  }
 
   agregar() {
-    alert('Agregar Pastilla');
-  }
-
-  editar(pastilla: any) {
-    alert(`Editar pastilla: ${pastilla.nombre}`);
-  }
-
-  eliminar(id: number) {
-    if (confirm('¿Estás seguro de eliminar esta pastilla?')) {
-      this.pastillas = this.pastillas.filter((t) => t.id !== id);
-    }
-  }
-  openAddPastillaModal() {
     const dialogRef = this.dialog.open(AddPastillaModalComponent);
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-        console.log('Pastilla agregada:', result);
+        this.isLoading = true;
+
+        // Convertir los datos del formulario al formato de la API
+        const nuevaPastilla: Pastilla = {
+          idMedicamento: '', // Se generará en el backend
+          nombreMedicamento: result.nombreMedicamento,
+          cantidad: parseInt(result.cantidad),
+          descripcionMedicamento: result.descripcionMedicamento, // Valor por defecto o se puede agregar al formulario
+          fechaCaducidad: new Date(result.fechaCaducidad),
+          informacionAdicional: result.informacionAdicional, // Valor por defecto o se puede agregar al formulario
+        };
+
+        this.pastillasService.createPastilla(nuevaPastilla).subscribe({
+          next: (response) => {
+            console.log('Medicamento agregado:', response);
+            this.cargarPastillas(); // Recargar la lista
+          },
+          error: (err) => {
+            console.error('Error al agregar medicamento:', err);
+            this.error = 'Error al agregar el medicamento';
+            this.isLoading = false;
+          },
+        });
       }
     });
-}
-openEditPastillaModal(patient: any) {
-  const dialogRef = this.dialog.open(EditPastillaModalComponent, {
-    data: patient
-      });
+  }
+
+  editar(pastilla: any) {
+    // Preparar los datos para el diálogo (formato UI)
+    const pastillaParaDialog = {
+      id: pastilla.idMedicamento,
+      medicamento: pastilla.nombreMedicamento,
+      fechacadu: pastilla.fechaCaducidad,
+      stock: pastilla.cantidad,
+    };
+
+    const dialogRef = this.dialog.open(EditPastillaModalComponent, {
+      data: pastillaParaDialog,
+    });
+
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-          console.log('Paciente modificado:', result);
-        }
+        this.isLoading = true;
+
+        // Convertir los datos del formulario al formato de la API
+        const pastillaActualizada: Pastilla = {
+          idMedicamento: result.id,
+          nombreMedicamento: result.medicamento,
+          cantidad: parseInt(result.stock),
+          descripcionMedicamento: pastilla.descripcionMedicamento, // Mantener el valor original
+          fechaCaducidad: new Date(result.fechacadu),
+          informacionAdicional: pastilla.informacionAdicional, // Mantener el valor original
+        };
+
+        this.pastillasService.updatePastilla(pastillaActualizada).subscribe({
+          next: (response) => {
+            console.log('Medicamento actualizado:', response);
+            this.cargarPastillas(); // Recargar la lista
+          },
+          error: (err) => {
+            console.error('Error al actualizar medicamento:', err);
+            this.error = 'Error al actualizar el medicamento';
+            this.isLoading = false;
+          },
+        });
+      }
+    });
+  }
+
+  eliminar(id: string) {
+    const pastilla = this.pastillas.find((p) => p.idMedicamento === id);
+
+    if (pastilla) {
+      // Preparar los datos para el diálogo (formato UI)
+      const pastillaParaDialog = {
+        id: pastilla.idMedicamento,
+        nombre: pastilla.nombreMedicamento,
+        fechaCaducidad: pastilla.fechaCaducidad,
+        stock: pastilla.cantidad,
+      };
+
+      const dialogRef = this.dialog.open(DeletePastillaModalComponent, {
+        data: pastillaParaDialog,
       });
 
-}
-openDeletePastillaModal(patient: any) {
-  const dialogRef = this.dialog.open(DeletePastillaModalComponent, {
-  data: patient
-   });
-    
-        dialogRef.afterClosed().subscribe((result: any) => {
-          if (result) {
-            console.log('Paciente eliminado:', patient);
-          }
-        });
-}
+      dialogRef.afterClosed().subscribe((confirm: boolean) => {
+        if (confirm) {
+          this.isLoading = true;
+
+          this.pastillasService.deletePastilla(id).subscribe({
+            next: () => {
+              console.log('Medicamento eliminado con ID:', id);
+              this.cargarPastillas(); // Recargar la lista
+            },
+            error: (err) => {
+              console.error('Error al eliminar medicamento:', err);
+              this.error = 'Error al eliminar el medicamento';
+              this.isLoading = false;
+            },
+          });
+        }
+      });
+    }
+  }
 }

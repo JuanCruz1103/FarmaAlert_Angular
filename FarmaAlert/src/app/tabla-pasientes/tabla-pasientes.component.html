@@ -1,29 +1,31 @@
 <app-navbar></app-navbar>
 <div class="container mt-3">
   <button class="btn btn-success" (click)="agregar()">➕ Agregar</button>
-  
+
   <table class="table table-bordered mt-3">
     <thead class="table-light">
       <tr>
-        <th>Pacientes</th>
+        <th>Paciente</th>
         <th>Habitación</th>
-        <th>Medicamentos</th>
-        <th>Detalles</th>
+        <th>Estado</th>
+        <th>Información Médica</th>
+        <th>Fecha de nacimiento</th>
         <th>Editar</th>
         <th>Eliminar</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let paciente of pacientes">
-        <td>{{ paciente.pacientes }}</td>
-        <td>{{ paciente.habitacion }}</td>
-        <td>{{ paciente.medicamentos }}</td>
-        <td>{{ paciente.detalles }}</td>
+        <td>{{ paciente.NombrePaciente }}</td>
+        <td>{{ paciente.HabitacionPaciente }}</td>
+        <td>{{ paciente.EstadoPaciente }}</td>
+        <td>{{ paciente.InformacionMedica }}</td>
+        <td>{{ paciente.FechaNacimiento | date:'shortDate' }}</td>
         <td>
           <button class="btn btn-warning btn-sm" (click)="editar(paciente)">✏️</button>
         </td>
         <td>
-          <button class="btn btn-danger btn-sm" (click)="eliminar(paciente.id)">🗑️</button>
+          <button class="btn btn-danger btn-sm" (click)="eliminar(paciente.IdPaciente)">🗑️</button>
         </td>
       </tr>
     </tbody>

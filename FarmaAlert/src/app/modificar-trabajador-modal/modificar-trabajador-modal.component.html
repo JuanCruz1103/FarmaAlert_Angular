@@ -1,23 +1,21 @@
 <h2 mat-dialog-title>Modificar Trabajador</h2>
+
 <mat-dialog-content>
   <form>
-    <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput [(ngModel)]="data.nombre" name="nombre" required>
-      </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Edad</mat-label>
-        <input matInput type="number" [(ngModel)]="data.edad" name="edad" required>
-      </mat-form-field>
-      
-      <mat-form-field>
-        <mat-label>Paciente</mat-label>
-        <input matInput [(ngModel)]="data.pacientes" name="pacientes" required>
-      </mat-form-field>
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="number" [(ngModel)]="data.nombre" name="nombre" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="data.email" name="Email" required>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions>
+
+<mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-button (click)="onSubmit()" cdkFocusInitial>Agregar</button>
+  <button mat-button color="primary" (click)="onSubmit()" cdkFocusInitial>Guardar</button>
 </mat-dialog-actions>

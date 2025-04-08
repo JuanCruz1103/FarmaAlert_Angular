@@ -1,23 +1,32 @@
 <h2 mat-dialog-title>Agregar Trabajador</h2>
 <mat-dialog-content>
   <form>
-    <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput [(ngModel)]="trabajador.nombre" name="nombre" required>
-      </mat-form-field>
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="trabajador.nombre" name="nombre" required />
+    </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Edad</mat-label>
-        <input matInput type="number" [(ngModel)]="trabajador.edad" name="edad" required>
-      </mat-form-field>
-      
-      <mat-form-field>
-        <mat-label>Paciente</mat-label>
-        <input matInput [(ngModel)]="trabajador.pacientes" name="pacientes" required>
-      </mat-form-field>
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" [(ngModel)]="trabajador.email" name="email" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" [(ngModel)]="trabajador.Contrasena" name="Contrasena" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Rol</mat-label>
+      <mat-select [(ngModel)]="trabajador.Rol" name="rol" required>
+        <mat-option value="Trabajador">Trabajador</mat-option>
+        <mat-option value="JefePiso">JefePiso</mat-option>
+      </mat-select>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions>
+
+<mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-button (click)="onSubmit()" cdkFocusInitial>Agregar</button>
+  <button mat-button color="primary" (click)="onSubmit()" cdkFocusInitial>Agregar</button>
 </mat-dialog-actions>
