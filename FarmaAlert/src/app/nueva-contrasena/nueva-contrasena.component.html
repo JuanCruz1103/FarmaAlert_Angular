@@ -1,1 +1,25 @@
-<p>nueva-contrasena works!</p>
+<div class="Nuevacontraseña-container">
+    <div class="Nuevacontraseña-card">
+        <img src="/Imagenes/FarmaAlertPNGWhite.svg" width="200px" class="mb-4" alt="Logo"><label>Nueva
+            contraseña</label>
+        <div class="password-input">
+            <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="newPassword" class="form-control" />
+            <span class="toggle-eye" (click)="togglePasswordVisibility()">
+                👁️
+            </span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Confirmar nueva contraseña</label>
+        <div class="password-input">
+            <input [type]="showConfirmPassword ? 'text' : 'password'" [(ngModel)]="confirmPassword"
+                class="form-control" />
+            <span class="toggle-eye" (click)="toggleConfirmPasswordVisibility()">
+                👁️
+            </span>
+        </div>
+    </div>
+
+    <button class="btn-confirm" (click)="confirm()">Confirmar</button>
+</div>

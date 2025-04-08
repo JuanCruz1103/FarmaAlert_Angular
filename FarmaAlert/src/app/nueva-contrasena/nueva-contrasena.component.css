@@ -1,0 +1,41 @@
+.container {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    font-family: sans-serif;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .password-input {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+  }
+  
+  .password-input input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .toggle-eye {
+    cursor: pointer;
+    padding: 0 10px;
+    font-size: 18px;
+  }
+  
+  .btn-confirm {
+    background-color: #d9534f;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
